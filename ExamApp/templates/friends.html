@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friends</title>
+    <style>
+        .link{
+            float: right;
+        }
+        .size{
+            font-size: 30px;
+        }
+        table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 500px;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+    .unlike{
+        background-color: yellow;
+
+    }
+    .like{
+        background-color: green;
+    }
+    </style>
+</head>
+<body>
+    <a href="/logout" class="link size">Logout</a>
+    <h1>Hello, {{theuser.firstname}}!</h1>
+    <h4>Here is the list of your firends:</h4>
+
+    <table>
+        {%if count == 0%}
+        <h3>You don't have friends yet.</h3>
+        {%else%}
+        <tr>
+            <th>Alias</th>
+            <th>Action</th>
+        </tr>
+        
+        {%for friend in friends%}
+        {%if friend.my_id == theuser%}
+        {%for user in users%}
+        {%if friend.f_id == user%}
+        <tr>
+            <td>{{user.alias}}</td>
+            <td><a href="/user/{{user.id}}">View Profile</a>     <a href="/remove/{{friend.id}}">Remove as Friend</a></td>
+        </tr>
+        {%endif%}
+        {%endfor%}
+        {%endif%}
+        {%if friend.f_id == theuser%}
+        {%for user in users%}
+        {%if friend.my_id == user%}
+        <tr>
+            <td>{{user.alias}}</td>
+            <td><a href="/user/{{user.id}}">View Profile</a>     <a href="/remove/{{friend.id}}">Remove as Friend</a></td>
+        </tr>
+        {%endif%}
+        {%endfor%}
+        {%endif%}
+        {%endfor%}
+        {%endif%}
+    </table>
+    <br><br><br>
+
+
+    
+    <table>
+        <tr>
+            <th>Alias</th>
+            <th>Action</th>
+        </tr>
+
+        
+        {%for l in list%}
+        <tr>
+            <td><a href="/user/{{l.id}}">{{l.alias}}</a></td>
+            <td><a href="/add/{{l.id}}"><button>Add as Friend</button></a></td>
+        </tr>
+        {%endfor%}
+
+    </table>
+</body>
+</html>

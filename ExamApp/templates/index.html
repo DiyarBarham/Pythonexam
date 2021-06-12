@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- CSS only -->
+<title>LOgin/Register</title>
+<style>
+  .a{
+    display: inline-block;
+    width: 40%;
+    margin: 10px;
+     vertical-align: top;
+     border: 2px solid black;
+     padding: 10px;
+  }
+  .asd{
+    display: block;
+  }
+</style>
+</head>
+<body>
+  <h1>Welcome!</h1>
+  {% if messages %}
+  <ul class="messages">
+  {% for message in messages %}
+  <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+  {% endfor %}
+  </ul>
+  {% endif %}
+  <div class="a">
+
+    <form action="/register" method="post">
+        {% csrf_token %}
+        <div class="asd">firstname: <input type="text" name="firstname"></div>
+        <div class="asd">Alais: <input type="text" name="alias"></div>
+        <div class="asd">Email: <input type="text" name="email"></div>
+        <div class="asd">Password: <input type="password" name="passwd"></div>
+        *Password should be atleast 8 characters
+        <div class="asd">Confirm Password: <input type="password" name="confirmpass"></div>
+        <div class="asd">Date of Birth: <input type="date" name="birthday"></div>
+        <div><input type="submit" value="SignUp"></div>
+    </form>            
+</div>        
+<div class="a">
+
+                <form action="/login" method="post">
+                    {% csrf_token %}
+                    <div class="asd">email: <input type="text" name="email"></div>
+                    
+                   <div class="asd"> Password: <input type="password" name="passwd"></div>
+                    <input type="submit" value="Login">
+                </form>
+</div>
+                   
+</body>
+</html>
